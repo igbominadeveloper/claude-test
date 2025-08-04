@@ -5,6 +5,23 @@ import { cn } from "@/lib/utils";
 import { User, Bot, Loader2 } from "lucide-react";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 
+const getToolDisplayName = (toolName: string): string => {
+  const toolNameMap: Record<string, string> = {
+    str_replace_editor: "Editing file",
+    file_manager: "Managing files",
+  };
+  
+  if (toolNameMap[toolName]) {
+    return toolNameMap[toolName];
+  }
+  
+  return toolName
+    .replace(/_/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .toLowerCase()
+    .replace(/^\w/, (c) => c.toUpperCase());
+};
+
 interface MessageListProps {
   messages: Message[];
   isLoading?: boolean;
@@ -13,7 +30,7 @@ interface MessageListProps {
 export function MessageList({ messages, isLoading }: MessageListProps) {
   if (messages.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
         <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-50 mb-4 shadow-sm">
           <Bot className="h-7 w-7 text-blue-600" />
         </div>
@@ -24,7 +41,7 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
   }
 
   return (
-    <div className="flex flex-col h-full overflow-y-auto px-4 py-6">
+    <div className="flex flex-col min-h-full overflow-y-auto px-4 py-6">
       <div className="space-y-6 max-w-4xl mx-auto w-full">
         {messages.map((message) => (
           <div
@@ -81,12 +98,12 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
                                 {tool.state === "result" && tool.result ? (
                                   <>
                                     <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                                    <span className="text-neutral-700">{tool.toolName}</span>
+                                    <span className="text-neutral-700">{getToolDisplayName(tool.toolName)}</span>
                                   </>
                                 ) : (
                                   <>
                                     <Loader2 className="w-3 h-3 animate-spin text-blue-600" />
-                                    <span className="text-neutral-700">{tool.toolName}</span>
+                                    <span className="text-neutral-700">{getToolDisplayName(tool.toolName)}</span>
                                   </>
                                 )}
                               </div>
