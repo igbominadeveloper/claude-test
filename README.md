@@ -2,7 +2,71 @@
 
 An intelligent React component generator that transforms natural language descriptions into live, interactive React components using Claude AI.
 
-## 🏗️ Core Architecture
+## Prerequisites
+
+- Node.js 18+
+- npm
+
+## Setup
+
+1. **Optional** Edit `.env` and add your Anthropic API key:
+
+```
+ANTHROPIC_API_KEY=your-api-key-here
+```
+
+The project will run without an API key. Rather than using a LLM to generate components, static code will be returned instead.
+
+2. Install dependencies and initialize database
+
+```bash
+npm run setup
+```
+
+This command will:
+
+- Install all dependencies
+- Generate Prisma client
+- Run database migrations
+
+## Running the Application
+
+### Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000)
+
+## Usage
+
+1. Sign up or continue as anonymous user
+2. Describe the React component you want to create in the chat
+3. View generated components in real-time preview
+4. Switch to Code view to see and edit the generated files
+5. Continue iterating with the AI to refine your components
+
+## Features
+
+- AI-powered component generation using Claude
+- Live preview with hot reload
+- Virtual file system (no files written to disk)
+- Syntax highlighting and code editor
+- Component persistence for registered users
+- Export generated code
+
+## Tech Stack
+
+- Next.js 15 with App Router
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Prisma with SQLite
+- Anthropic Claude AI
+- Vercel AI SDK
+
+## 🏗️ Architecture Overview
 
 **UIGen** is a **React/Next.js AI code generator** that lets users create and preview React components through natural language chat with Claude AI.
 
@@ -211,39 +275,6 @@ Project {
 5. **Anonymous-first Design** - Users can work without registration
 6. **Progressive Enhancement** - Works without API key using mock provider
 
-## 🚀 Getting Started
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/igbominadeveloper/claude-test.git
-   cd claude-test
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables** (optional)
-   ```bash
-   # Add to .env.local
-   ANTHROPIC_API_KEY=your_api_key_here
-   ```
-
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open [http://localhost:3000](http://localhost:3000)** in your browser
-
-## 📝 Usage
-
-1. **Describe your component** in natural language
-2. **Watch Claude generate** the React code in real-time
-3. **See the preview** update live as code is generated
-4. **Iterate and refine** by asking for modifications
-5. **Save your work** by creating an account (optional)
 
 ## 🤝 Contributing
 
